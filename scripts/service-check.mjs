@@ -1,0 +1,17 @@
+// Requires separate TEST Supabase project + two existing test accounts. Never creates paid grants.
+try{process.loadEnvFile('.env.local');}catch(e){if(e.code!=='ENOENT')throw e;}
+const required=['SUPABASE_URL','SUPABASE_PUBLISHABLE_KEY','TEST_A_EMAIL','TEST_A_PASSWORD','TEST_B_EMAIL','TEST_B_PASSWORD'];
+const missing=required.filter(key=>!process.env[key]);
+if(missing.length){console.log('NÃO EXECUTADO: configure '+missing.join(', ')+'. Nenhum login/pagamento foi validado.');process.exit(0);}
+if(process.env.MP_MODE!=='test')throw Error('Use apenas ambiente de teste.');
+const origin=process.env.TEST_APP_URL||'http://127.0.0.1:3000';
+async function login(prefix){const res=await fetch(process.env.SUPABASE_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:process.env.SUPABASE_PUBLISHABLE_KEY,'Content-Type':'application/json'},body:JSON.stringify({email:process.env[prefix+'_EMAIL'],password:process.env[prefix+'_PASSWORD']})});if(!res.ok)throw Error('Login de teste falhou: '+prefix);return res.json();}
+const a=await login('TEST_A'),b=await login('TEST_B');if(a.user.id===b.user.id)throw Error('As duas contas de teste precisam ser diferentes.');
+const request=(path,token)=>fetch(origin+'/api/'+path,{headers:token?{Authorization:'Bearer '+token}:undefined});
+if((await request('resumes')).status!==401)throw Error('API aceitou leitura sem autenticação.');
+const own=await request('resumes',a.access_token);if(!own.ok)throw Error('Não foi possível listar currículos da conta A.');const list=await own.json();
+if(!list.resumes.length)console.log('ISOLAMENTO DE CONTEÚDO NÃO EXECUTADO: salve um currículo na conta A após uma compra TESTE válida.');
+for(const doc of list.resumes){const other=await request('resumes/'+doc.id,b.access_token);if(other.status!==404)throw Error('Conta B recebeu resposta inesperada para documento de A: '+other.status);const direct=await fetch(process.env.SUPABASE_URL+'/rest/v1/resumes?id=eq.'+doc.id,{headers:{apikey:process.env.SUPABASE_PUBLISHABLE_KEY,Authorization:'Bearer '+b.access_token}});if(!direct.ok||JSON.stringify(await direct.json())!=='[]')throw Error('RLS não isolou as duas contas.');}
+const unauthorized=await fetch(origin+'/api/export',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({format:'pdf',documentKey:'not-paid',data:{}})});if(unauthorized.status!==401)throw Error('Exportação sem sessão não foi negada.');
+for(const [label,key] of [['sem compra','TEST_UNPAID_RESUME_ID'],['expirado','TEST_EXPIRED_RESUME_ID']]){const resumeId=process.env[key];if(!resumeId){console.log('NÃO EXECUTADO: exportação '+label+'; configure '+key+'.');continue;}for(const format of ['pdf','docx','txt']){const denied=await fetch(origin+'/api/export',{method:'POST',headers:{Authorization:'Bearer '+a.access_token,'Content-Type':'application/json'},body:JSON.stringify({resumeId,format})});if(denied.status!==403)throw Error('Esperava 403 para '+label+'/'+format+', recebido '+denied.status);const other=await fetch(origin+'/api/export',{method:'POST',headers:{Authorization:'Bearer '+b.access_token,'Content-Type':'application/json'},body:JSON.stringify({resumeId,format})});if(other.status!==404)throw Error('Outra conta não recebeu 404 na exportação.');}console.log('Negação de exportação real verificada: '+label+'.');}
+console.log('Executados: login real de duas contas, API sem sessão e isolamento dos documentos encontrados ('+list.resumes.length+'). Pagamento/checkout e PDF NÃO foram testados por este script.');
