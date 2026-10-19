@@ -6,12 +6,7 @@
     "api/handler.js": {
       "maxDuration": 60,
       "memory": 2048,
-      "includeFiles": [
-        "style.css",
-        "model.js",
-        "exports.js",
-        "node_modules/@sparticuz/chromium/bin/**"
-      ]
+      "includeFiles": "{style.css,model.js,exports.js,node_modules/@sparticuz/chromium/bin/**}"
     }
   },
   "rewrites": [
