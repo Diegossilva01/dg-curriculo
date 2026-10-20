@@ -342,3 +342,8 @@
 .paper.trilha h3{margin-top:calc(var(--section-gap)*.88)}
 .paper.urbano h3{margin-top:calc(var(--section-gap)*.78);padding:4pt 8pt}
 .paper.urbano .resume-entry{margin-bottom:10pt}
+
+/* Preserve A4 typography on iOS; scale the whole document instead of CSS zoom. */
+.paper,.paper *{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.paper-wrap{overflow:hidden}
+@media print{#large-preview{height:auto!important}#large-preview .paper{transform:none!important;transform-origin:top left!important;zoom:1!important}}

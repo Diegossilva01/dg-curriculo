@@ -16,3 +16,6 @@ body.home-body{font-family:Arial,Helvetica,sans-serif;color:var(--home-ink);back
 @media(max-width:850px){.home-hero-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.home-nav .home-nav-cta{padding:10px 12px;font-size:10px;gap:9px;white-space:nowrap}.home-model-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:360px){.home-nav nav{display:none}.home-nav{justify-content:space-between}.home-hero h1{font-size:41px}.home-hero-art{width:350px;max-width:none;transform:scale(.8);transform-origin:top left;margin-bottom:-80px}.home-model-card .home-preview{--preview-scale:.29;height:326px;max-width:230px}.home-model-link{padding:20px}}
+
+/* Use a geometric transform so Safari scales letters and spacing together. */
+.home-preview .paper{zoom:1!important;transform:scale(var(--preview-scale));transform-origin:top left}
