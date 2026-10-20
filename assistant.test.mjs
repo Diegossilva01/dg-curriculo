@@ -7,3 +7,12 @@ test('guided creation preserves supplied facts, selected layout and original inp
 test('first-job choice omits work history without claiming unprovided qualifications',()=>{const d=A.makeResume({...answers(),noExperience:true,skills:''},{template:'executivo'});assert.deepEqual(d.experience,[]);assert.ok(d.summary.includes('primeira oportunidade'));assert.equal(d.order[1],'education');assert.ok(!d.summary.includes('Atendente'));assert.equal(d.education[0].end,'2024');});
 test('user-written summary wins and incomplete contact does not create a result',()=>{assert.equal(A.makeResume({...answers(),about:'Texto revisado por mim.'}).summary,'Texto revisado por mim.');assert.throws(()=>A.makeResume({...answers(),contact:{first:'Ana'}}),/nome/);});
 test('new professional layouts render escaped content and remain recognized after normalization',()=>{for(const template of ['executivo','corporativo','minimalista','academico','tecnico','editorial']){const d=A.makeResume(answers(),{template});d.first='<script>malicioso</script>';const html=C.resumeHTML(d);assert.equal(C.normalize(d).template,template);assert.ok(html.includes('&lt;script&gt;'));assert.ok(!html.includes('<script>'));assert.equal(html.includes('resume-columns'),C.columnModels.includes(template));}});
+test('signature templates preserve sections, escape names and support optional portraits',()=>{
+ for(const template of ['aurora','vertice','atelier','horizonte']){
+  const d=A.makeResume(answers(),{template});d.first='<script>test</script>';
+  const html=C.resumeHTML(d);assert.equal(C.normalize(d).template,template);assert.ok(html.includes('&lt;script&gt;test&lt;/script&gt;'));assert.ok(!html.includes('<script>'));
+  assert.ok(html.includes('resume-monogram'));assert.ok(!html.includes('<img'));assert.ok(html.includes('Atendimento ao público'));assert.ok(html.includes('Ensino médio'));
+  d.photo='data:image/png;base64,aGVsbG8=';assert.equal((C.resumeHTML(d).match(/class="resume-photo"/g)||[]).length,1);
+  d.hiddenSections=['skills'];assert.ok(!C.resumeHTML(d).includes('data-section="skills"'));
+ }
+});

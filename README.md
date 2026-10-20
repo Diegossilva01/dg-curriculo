@@ -234,3 +234,7 @@ As respostas ficam em armazenamento local por rascunho. A finalização cria out
 ### Consulta de CEP
 
 O editor e o assistente consultam `https://viacep.com.br/ws/{cep}/json/` ao informar oito dígitos. Somente o CEP é enviado ao ViaCEP, sem credenciais ou chave. Cidade/UF e logradouro preenchem campos vazios; dados já escritos e alterações feitas durante a consulta são preservados. CEP inexistente ou falha de rede permite continuar manualmente. A consulta tem limite de sete segundos e cache em memória. A CSP permite a conexão somente ao domínio ViaCEP.
+
+### Coleção de modelos com fotografia
+
+Aurora (cabeçalho escuro e seções editoriais), Vértice (coluna escura e linha do tempo), Ateliê (tipografia serifada e tons quentes) e Horizonte (retrato no cabeçalho e coluna de apoio à direita) ampliam a coleção para 20 modelos. A galeria possui filtro Com foto. Todos aceitam foto opcional; sem foto, os quatro novos usam as iniciais do usuário. A foto fictícia de demonstração foi gerada para este projeto, otimizada e incorporada em `demo-portrait.js`; aparece apenas na galeria e nunca é gravada nos rascunhos.

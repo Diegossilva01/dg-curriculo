@@ -173,3 +173,82 @@
 .paper.tecnico section[data-section=skills]>ul{display:flex}
 .paper.academico h3{margin-top:calc(var(--section-gap)*.85);font-size:calc(var(--heading-size)*.9)}
 .paper.inteligente .resume-header{padding:12pt 15pt}
+
+/* Signature collection: four distinct compositions with optional portrait. */
+.paper.aurora,.paper.vertice,.paper.atelier,.paper.horizonte{padding:0}
+.paper .signature-identity{min-width:0;flex:1}
+.paper .signature-identity h2{overflow-wrap:anywhere}
+.paper .resume-monogram{display:grid;place-items:center;flex-shrink:0;width:30mm;height:30mm;font-size:32pt;line-height:1;background:#e2eae8;color:#294e48;letter-spacing:-2pt}
+.paper .signature-header{display:flex;align-items:center;gap:21pt;break-inside:avoid}
+.paper .signature-header .resume-photo{float:none;display:block;flex-shrink:0;margin:0;width:30mm;height:30mm;object-fit:cover}
+.paper .signature-header .job-title{margin:7pt 0 0;font-size:1em;line-height:1.5}
+.paper .signature-portrait{margin-bottom:24pt}
+/* Aurora: full-width midnight masthead and editorial section labels. */
+.paper.aurora .signature-header{padding:12mm var(--margin-x);background:#182f3c;min-height:51mm;border-bottom:5pt solid var(--resume-color)}
+.paper.aurora .signature-header h2{font-size:calc(var(--name-size)*1.16);color:#fff;line-height:1.06;font-weight:700;letter-spacing:-1.3pt}
+.paper.aurora .signature-header .job-title{color:#dae9e8;letter-spacing:1.5pt;text-transform:uppercase;font-size:.85em}
+.paper.aurora .signature-header .resume-photo,.paper.aurora .resume-monogram{width:31mm;height:34mm;border-radius:3pt 18pt 3pt 3pt;box-shadow:5pt 5pt 0 #ffffff18}
+.paper.aurora .resume-monogram{background:#ffffff18;color:#fff}
+.paper.aurora .signature-contact{padding:11pt var(--margin-x);background:#f0f3f4}
+.paper.aurora .signature-contact .contact{padding:0;border:0;font-size:.75em;gap:4pt 15pt;color:#415966}
+.paper.aurora .signature-content{padding:5pt var(--margin-x) var(--margin-y)}
+.paper.aurora .signature-content>section{display:grid;grid-template-columns:110pt minmax(0,1fr);gap:17pt;border-bottom:1px solid #dfe6e8;padding:14pt 0}
+.paper.aurora .signature-content>section:last-child{border-bottom:0}
+.paper.aurora .signature-content>section>h3{margin:1pt 0 0;padding:0;border:0;color:#264756;letter-spacing:1pt;font-size:calc(var(--heading-size)*.66);line-height:1.7}
+.paper.aurora .section-body{min-width:0;font-size:.92em}
+.paper.aurora .entry-heading{display:block}
+.paper.aurora .entry-heading .meta{margin-top:3pt;color:#69818a}
+.paper.aurora .entry-subtitle{font-size:.9em}
+.paper.aurora section[data-section=skills] .section-body>ul{margin:0;gap:4pt 16pt}
+/* Vértice: bold portrait column, navy and architectural rhythm. */
+.paper.vertice .resume-side{width:32%;background:#152e3d;color:#e4edf1;padding:var(--margin-y) 19pt;border-top:7pt solid var(--resume-color)}
+.paper.vertice .resume-main{width:68%;padding:var(--margin-y) 25pt;border-top:7pt solid #e1e9ec}
+.paper.vertice .signature-portrait .resume-photo,.paper.vertice .resume-monogram{float:none;display:block;width:35mm;height:35mm;object-fit:cover;margin:0 0 25pt;border-radius:50%;border:4pt solid #ffffff;outline:1pt solid #668f94}
+.paper.vertice .resume-monogram{display:grid;background:#385661;color:#fff}
+.paper.vertice .resume-side h3{color:#b9d4d5;border-color:#ffffff22;font-size:calc(var(--heading-size)*.7);letter-spacing:1.2pt}
+.paper.vertice .resume-side li::marker{color:#a9c8cb}
+.paper.vertice .resume-side p,.paper.vertice .resume-side li{font-size:.82em;line-height:1.7}
+.paper.vertice .resume-main .signature-header{display:block;margin-bottom:24pt;padding:0 0 20pt;border-bottom:2pt solid var(--resume-color)}
+.paper.vertice .signature-header h2{text-transform:uppercase;color:#1d3545;font-size:calc(var(--name-size)*1.07);line-height:1.03;letter-spacing:-.7pt}
+.paper.vertice .signature-header .job-title{color:#627a86;font-size:1em;letter-spacing:.4pt;margin-top:12pt}
+.paper.vertice .resume-main h3{background:#edf2f4;padding:6pt 8pt;border:0;font-size:calc(var(--heading-size)*.70);letter-spacing:1pt}
+.paper.vertice .resume-main .resume-entry{border-left:1pt solid #d5e0e4;padding-left:11pt;position:relative}
+.paper.vertice .resume-main .resume-entry:before{content:'';width:5pt;height:5pt;position:absolute;left:-3pt;top:5pt;border-radius:50%;background:var(--resume-color)}
+/* Ateliê: photographic editorial composition, warm neutrals and serif name. */
+.paper.atelier .resume-side{width:29%;background:#eee8e0;color:#574b41;padding:var(--margin-y) 18pt}
+.paper.atelier .resume-main{width:71%;padding:var(--margin-y) 25pt;background:#fffdfa}
+.paper.atelier .signature-portrait .resume-photo,.paper.atelier .resume-monogram{float:none;display:block;object-fit:cover;width:100%;height:45mm;aspect-ratio:auto;margin:0 0 24pt;border-radius:50% 50% 2pt 2pt}
+.paper.atelier .resume-monogram{display:grid;background:#ddd0c3;color:#604b3f}
+.paper.atelier .signature-header{display:block;margin:0 0 21pt;padding:0 0 20pt;border-bottom:1pt solid #b7a68f}
+.paper.atelier .signature-header h2{font-family:Georgia,serif;font-weight:400;font-size:calc(var(--name-size)*1.2);letter-spacing:-1.1pt;color:#403a34;line-height:1.06}
+.paper.atelier .signature-header .job-title{color:#8a6755;font-size:.86em;letter-spacing:1.5pt;text-transform:uppercase;margin-top:13pt}
+.paper.atelier .resume-main h3{font-family:Georgia,serif;font-weight:400;letter-spacing:0;text-transform:none;font-size:calc(var(--heading-size)*1.03);color:#675142;border-bottom:1px solid #e2d7cb;padding-bottom:6pt}
+.paper.atelier .resume-side h3{color:#705746;border-color:#d6c8b7;font-size:calc(var(--heading-size)*.66);letter-spacing:1pt}
+.paper.atelier .resume-side p,.paper.atelier .resume-side li{font-size:.82em;color:#65574c}
+.paper.atelier h4{color:#4b443d}
+.paper.atelier li::marker{color:#a08067}
+/* Horizonte: wide portrait header, open main column and right-hand details. */
+.paper.horizonte .signature-header{padding:11mm var(--margin-x);background:#eef4f3;border-right:10pt solid var(--resume-color);gap:22pt;min-height:48mm}
+.paper.horizonte .signature-header .resume-photo,.paper.horizonte .resume-monogram{width:30mm;height:30mm;border-radius:50% 50% 8pt 50%;border:3pt solid white}
+.paper.horizonte .signature-header h2{font-weight:400;font-size:calc(var(--name-size)*1.16);color:#244844;letter-spacing:-1.2pt;line-height:1.06}
+.paper.horizonte .signature-header .job-title{color:#527c72;font-size:1em;letter-spacing:.3pt}
+.paper.horizonte .resume-columns{min-height:0}
+.paper.horizonte .resume-main{width:67%;padding:17pt 22pt var(--margin-y) var(--margin-x)}
+.paper.horizonte .resume-side{width:33%;background:white;color:#4c6963;border-left:1px solid #e0e9e5;padding:17pt 18pt var(--margin-y)}
+.paper.horizonte .resume-main h3{font-size:calc(var(--heading-size)*.74);letter-spacing:1pt;color:#335f56;border-bottom:0;padding-bottom:0;position:relative}
+.paper.horizonte .resume-main h3:before{content:'';display:inline-block;width:5pt;height:5pt;background:var(--resume-color);margin-right:7pt;vertical-align:middle}
+.paper.horizonte .resume-side h3{color:#456b61;font-size:calc(var(--heading-size)*.67);border-color:#d9e5df}
+.paper.horizonte .resume-side p,.paper.horizonte .resume-side li{font-size:.82em}
+.paper .section-body{min-width:0}
+.paper section[data-section=skills] .section-body>ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3pt 18pt}
+.paper .resume-side section[data-section=skills] .section-body>ul{display:block}
+.paper.tecnico section[data-section=skills] .section-body>ul{display:flex}
+.photo-example-label{display:inline-block;font-size:9px;font-style:normal;font-weight:600;background:#e7eee9;color:#3c6656;border-radius:4px;padding:4px 6px;margin-left:8px;vertical-align:middle}
+.gallery-card-label .photo-example-label+small{margin-top:9px}
+.gallery-filters{flex-wrap:wrap}
+@media(max-width:560px){.gallery-card-label{flex-direction:column}.photo-example-label{font-size:8px}.gallery-card-label>span{max-width:none}.gallery-filters{padding:0 12px}}
+@media print{.paper.aurora .signature-content{padding:5pt 0 0}.paper.aurora .signature-header,.paper.horizonte .signature-header{padding:8mm}.paper.aurora .signature-contact{padding:10pt 8mm}.paper.aurora .signature-content>section{break-inside:auto}}
+.paper.aurora .signature-header{padding-top:9mm;padding-bottom:9mm}
+.paper.aurora .signature-content>section{grid-template-columns:100pt minmax(0,1fr);gap:15pt;padding:12pt 0}
+.paper.aurora .section-body{font-size:.9em}
+@media print{.paper.aurora .signature-content>section{padding-top:9pt;padding-bottom:9pt}.paper.aurora .signature-content>section:last-child{padding-bottom:0}}
