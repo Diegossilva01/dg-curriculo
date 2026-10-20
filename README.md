@@ -25,7 +25,7 @@ Depois da mensagem de inicialização, abra `http://127.0.0.1:3000` (inicial) ou
 
 ## O que foi preservado e acrescentado
 
-- Editor com 16 layouts, paleta, foto/enquadramento, dados pessoais, experiências, formação, habilidades, idiomas, resumo, cursos, certificados, links e extras.
+- Editor com 10 layouts, paleta, foto/enquadramento, dados pessoais, experiências, formação, habilidades, idiomas, resumo, cursos, certificados, links e extras.
 - Formatação, reordenação, prévia, rascunhos locais, duplicação, exclusão e backup JSON. Modelos trocados sem apagar campos.
 - Conta: cadastro, login, logout, confirmação de e-mail e recuperação de senha usando Supabase Auth, com PKCE nos links. Senhas não são armazenadas pela aplicação.
 - Página `/meus-curriculos/`: listagem, abrir, renomear, duplicar, salvar e excluir documentos da conta. O conteúdo é protegido no servidor; a listagem exibe somente metadados do próprio usuário.
@@ -225,8 +225,12 @@ Para testes externos opcionais, `TEST_UNPAID_RESUME_ID` e `TEST_EXPIRED_RESUME_I
 
 ## Assistente guiado e modelos profissionais
 
-A criação de um novo currículo começa na galeria de modelos. Depois da escolha, o usuário pode preencher manualmente ou responder às sete etapas do assistente. Executivo, Corporativo, Minimalista, Acadêmico, Técnico e Editorial complementam os modelos existentes.
+A criação de um novo currículo começa na galeria de modelos. Depois da escolha, o usuário pode preencher manualmente ou responder às perguntas curtas do assistente, também acessível pelo botão no editor. Executivo, Corporativo, Minimalista, Acadêmico, Técnico e Editorial complementam os modelos existentes.
 
-O assistente é programado e funciona no navegador: não utiliza uma API de IA generativa, não exige chave e não envia as respostas a outro provedor. Ele organiza os dados e propõe um resumo com base somente no objetivo, experiência e habilidades informados. A opção de primeiro emprego não cria experiências fictícias. O resumo pode ser substituído antes da montagem.
+O assistente é programado e funciona no navegador: não utiliza uma API de IA generativa, não exige chave e não envia o conteúdo do currículo a outro provedor. Ele organiza os dados e propõe um resumo com base somente no objetivo, experiência e habilidades informados. A opção de primeiro emprego não cria experiências fictícias. O resumo pode ser substituído antes da montagem.
 
 As respostas ficam em armazenamento local por rascunho. A finalização cria outro rascunho, preserva o documento anterior e abre a prévia para revisão. Pagamento e verificação de acesso continuam obrigatórios para salvar na conta ou exportar. Os arquivos `assistant-core.js` e `assistant.js` são copiados pelo build para `/assets/`.
+
+### Consulta de CEP
+
+O editor e o assistente consultam `https://viacep.com.br/ws/{cep}/json/` ao informar oito dígitos. Somente o CEP é enviado ao ViaCEP, sem credenciais ou chave. Cidade/UF e logradouro preenchem campos vazios; dados já escritos e alterações feitas durante a consulta são preservados. CEP inexistente ou falha de rede permite continuar manualmente. A consulta tem limite de sete segundos e cache em memória. A CSP permite a conexão somente ao domínio ViaCEP.

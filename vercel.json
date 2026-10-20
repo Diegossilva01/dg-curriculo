@@ -33,7 +33,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.google.com.br; connect-src 'self' https://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.google.com.br; frame-src https://www.googletagmanager.com https://www.google.com https://td.doubleclick.net; frame-ancestors 'none'; form-action 'self'; base-uri 'self'"
+          "value": "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.google.com.br; connect-src 'self' https://viacep.com.br https://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.googleadservices.com https://*.doubleclick.net https://www.google.com https://www.google.com.br; frame-src https://www.googletagmanager.com https://www.google.com https://td.doubleclick.net; frame-ancestors 'none'; form-action 'self'; base-uri 'self'"
         }
       ]
     },
