@@ -83,4 +83,6 @@ $('#import').onchange=async e=>{const file=e.target.files[0];if(!file)return;try
 $('#photo-file').onchange=e=>{loadPhoto(e.target.files[0]);e.target.value='';};$('#suggest-area').onchange=renderSuggestions;
 window.addEventListener('resize',fitPapers);window.addEventListener('beforeprint',()=>{syncLarge();refreshWatermarks();syncPrintSettings();});window.addEventListener('afterprint',()=>{document.title='Trajetória — Criador de currículos';});
 window.addEventListener('storage',e=>{if(e.key===KEY){storageLocked=true;notify('Rascunhos alterados em outra aba. Exporte um backup e recarregue antes de editar.');}});
+const requestedTemplate=globalThis.location?.search?new URLSearchParams(globalThis.location.search).get('modelo'):null;
+if(!storageLocked&&C.models.some(([id])=>id===requestedTemplate)){data.template=requestedTemplate;choosingModel=true;const cleanURL=new URL(globalThis.location.href);cleanURL.searchParams.delete('modelo');globalThis.history.replaceState(null,'',cleanURL.pathname+cleanURL.search+cleanURL.hash);}
 render();if(storageError)notify(storageError);else persist();

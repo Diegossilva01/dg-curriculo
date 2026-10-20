@@ -242,3 +242,7 @@ Aurora (cabeçalho escuro e seções editoriais), Vértice (coluna escura e linh
 ### Outras composições profissionais
 
 A coleção também inclui Órbita (perfil circular e curva de cor), Panorama (faixas horizontais), Linha do tempo (datas em coluna) e Urbano (títulos em blocos), totalizando 24 modelos. A referência visual pesquisada foi https://www.jobseeker.com/pt/curriculo/modelos; os novos layouts são implementações próprias, sem importar código, fotografias ou textos do site. As cores utilizam a mesma paleta com contraste adaptativo e as fotos dos exemplos seguem restritas à galeria.
+
+### Página inicial
+
+A página pública inicial é gerada por `scripts/home.mjs` e usa `web/home.css`. As prévias decorativas são geradas com o renderizador dos modelos reais e dados fictícios; não acessam rascunhos ou dados do visitante. O CSS dos modelos é limitado às prévias por `@scope`. A página apresenta 24 modelos, exemplos de atividades, funcionamento do assistente programado e a oferta de um currículo por 30 dias. Os links Usar este modelo enviam um identificador validado ao editor, preservando o conteúdo já preenchido; o parâmetro é removido após a aplicação para não sobrescrever escolhas futuras ao recarregar.
