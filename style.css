@@ -347,3 +347,25 @@
 .paper,.paper *{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .paper-wrap{overflow:hidden}
 @media print{#large-preview{height:auto!important}#large-preview .paper{transform:none!important;transform-origin:top left!important;zoom:1!important}}
+
+/* Compact live preview above the mobile form. */
+#preview-thumbnail{cursor:zoom-in}#preview-thumbnail:focus-visible{outline:3px solid #8060d0;outline-offset:4px}#preview-thumbnail .paper{pointer-events:none}
+@media(max-width:600px){
+ .workspace{display:flex;flex-direction:column;min-height:calc(100dvh - 76px)}
+ .workspace>.sidebar{width:100%;padding:9px 12px}
+ .sidebar nav{display:flex;overflow-x:auto;gap:4px}
+ .sidebar .eyebrow,.sidebar .side-bottom{display:none}
+ .sidebar .step{white-space:nowrap;padding:7px}
+ .preview-panel{display:grid;grid-template-columns:60px minmax(0,1fr);grid-template-rows:auto auto;column-gap:15px;row-gap:5px;align-content:center;align-items:center;position:sticky;top:0;z-index:10;flex:none;padding:12px 19px;background:#f7f7fc;border-bottom:1px solid #e1deed;box-shadow:0 3px 14px #28234b08;overflow:hidden}
+ .preview-panel .paper-wrap{grid-column:1;grid-row:1/3;width:60px;max-height:85px;align-self:center;margin:0;border-radius:3px;background:white;box-shadow:0 2px 7px #29244814}
+ .preview-panel .preview-toolbar{grid-column:2;grid-row:1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 9px;margin:0;font-size:8px;letter-spacing:.7px}
+ .preview-panel .preview-toolbar>span{font-size:8px;line-height:1.8}
+ .preview-panel #preview-button{font-size:10px;padding:8px 11px;border:1px solid #d9d3e7;border-radius:7px;background:#fff;letter-spacing:0;color:#65508c}
+ .preview-panel .live-dot{width:5px;height:5px;margin-right:5px}
+ .preview-panel .preview-bottom{grid-column:2;grid-row:2;display:block;margin:0;align-self:start;font-size:11px;color:#81758f;line-height:1.6}
+ .preview-panel .preview-bottom>span:first-child{display:none}
+ .preview-panel .preview-note{display:none}
+ .workspace>.editor{width:100%;padding:24px 19px;min-width:0}
+ .editor .breadcrumb{font-size:8px;margin-bottom:17px}
+}
+@media(max-width:360px){.preview-panel{padding:10px 15px;column-gap:12px}.preview-panel .preview-toolbar{font-size:7px}.preview-panel .preview-toolbar>span{font-size:7px}.preview-panel #preview-button{padding:7px 9px;font-size:9px}}
