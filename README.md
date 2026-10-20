@@ -238,3 +238,7 @@ O editor e o assistente consultam `https://viacep.com.br/ws/{cep}/json/` ao info
 ### Coleção de modelos com fotografia
 
 Aurora (cabeçalho escuro e seções editoriais), Vértice (coluna escura e linha do tempo), Ateliê (tipografia serifada e tons quentes) e Horizonte (retrato no cabeçalho e coluna de apoio à direita) ampliam a coleção para 20 modelos. A galeria possui filtro Com foto. Todos aceitam foto opcional; sem foto, os quatro novos usam as iniciais do usuário. A foto fictícia de demonstração foi gerada para este projeto, otimizada e incorporada em `demo-portrait.js`; aparece apenas na galeria e nunca é gravada nos rascunhos.
+
+### Outras composições profissionais
+
+A coleção também inclui Órbita (perfil circular e curva de cor), Panorama (faixas horizontais), Linha do tempo (datas em coluna) e Urbano (títulos em blocos), totalizando 24 modelos. A referência visual pesquisada foi https://www.jobseeker.com/pt/curriculo/modelos; os novos layouts são implementações próprias, sem importar código, fotografias ou textos do site. As cores utilizam a mesma paleta com contraste adaptativo e as fotos dos exemplos seguem restritas à galeria.

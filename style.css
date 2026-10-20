@@ -281,3 +281,64 @@
 .paper.editorial .resume-side h3,.paper.editorial .resume-main h3{border-color:var(--resume-rule)}
 .paper.inteligente .resume-header,.paper.tecnico section[data-section=skills] li{background:var(--resume-soft)}
 .paper.lateral .resume-side h3{color:var(--resume-on-color);border-color:currentColor}
+
+/* Additional original layouts informed by contemporary resume conventions. */
+.paper.orbita,.paper.panorama,.paper.trilha,.paper.urbano{padding:0}
+.paper.orbita .resume-side{width:31%;padding:0;background:var(--resume-soft);color:var(--resume-ink)}
+.paper.orbita .resume-main{width:69%;padding:var(--margin-y) 24pt}
+.paper.orbita .orbit-profile{padding:var(--margin-y) 18pt 18pt;background:var(--resume-color);color:var(--resume-on-color);border-radius:0 0 45pt 0}
+.paper.orbita .orbit-profile h2{font-size:calc(var(--name-size)*.72);color:var(--resume-on-color);line-height:1.1;letter-spacing:-.5pt;margin:0 0 9pt}
+.paper.orbita .orbit-profile .job-title{font-size:.82em;line-height:1.5;color:var(--resume-on-color);letter-spacing:.3pt;margin-bottom:18pt}
+.paper.orbita .orbit-profile .resume-photo,.paper.orbita .orbit-profile .resume-monogram{width:32mm;height:32mm;border-radius:50%;object-fit:cover;float:none;margin:0 auto;border:4pt solid white;outline:1px solid #ffffff55}
+.paper.orbita .resume-monogram{background:var(--resume-panel);color:var(--resume-ink);font-size:25pt}
+.paper.orbita .orbit-details{padding:23pt 18pt}
+.paper.orbita .resume-side h3{color:var(--resume-ink);font-size:calc(var(--heading-size)*.65);border-color:var(--resume-rule)}
+.paper.orbita .resume-side p,.paper.orbita .resume-side li{font-size:.82em}
+.paper.orbita .resume-main h3{color:var(--resume-ink);text-transform:none;letter-spacing:0;font-size:calc(var(--heading-size)*.94);font-weight:500;border-color:var(--resume-rule)}
+.paper.orbita .resume-main>section:first-child h3{margin-top:0}
+.paper.orbita .resume-entry{margin-bottom:14pt}
+/* Panorama: broad nameplate and framing horizontal bands. */
+.paper.panorama .reference-layout{border-top:7pt solid var(--resume-color);border-bottom:4pt solid var(--resume-color)}
+.paper.panorama .signature-header{padding:8mm var(--margin-x) 7mm;display:block;border-bottom:1px solid var(--resume-rule)}
+.paper.panorama .signature-header h2{color:var(--resume-ink);font-weight:700;letter-spacing:-1pt;font-size:calc(var(--name-size)*1.06)}
+.paper.panorama .signature-header .job-title{color:var(--resume-ink);font-size:.93em;letter-spacing:.3pt}
+.paper.panorama .resume-columns{min-height:0}
+.paper.panorama .resume-side{width:28%;padding:18pt;background:var(--resume-soft);color:var(--resume-ink)}
+.paper.panorama .resume-main{width:72%;padding:18pt 24pt}
+.paper.panorama .signature-portrait .resume-photo,.paper.panorama .resume-monogram{width:100%;height:37mm;object-fit:cover;margin:0 0 20pt;float:none;aspect-ratio:auto;border-radius:3pt}
+.paper.panorama .resume-monogram{background:var(--resume-panel);color:var(--resume-ink)}
+.paper.panorama .signature-portrait{margin-bottom:0}
+.paper.panorama .resume-main>section:first-child h3{margin-top:0}
+.paper.panorama .resume-main h3{font-size:calc(var(--heading-size)*.87);color:var(--resume-ink);text-transform:none;letter-spacing:0;border:0;padding-bottom:0}
+.paper.panorama .resume-side h3{color:var(--resume-ink);font-size:calc(var(--heading-size)*.65);border-color:var(--resume-rule)}
+/* Timeline: readable date lane, connected career markers, no invented ratings. */
+.paper.trilha .signature-header{padding:var(--margin-y) var(--margin-x) 13pt;align-items:center;background:var(--resume-soft);border-top:4pt solid var(--resume-color)}
+.paper.trilha .signature-header h2{color:var(--resume-ink);font-size:calc(var(--name-size)*1.07);font-weight:700}
+.paper.trilha .signature-header .job-title{color:var(--resume-ink);letter-spacing:.3pt}
+.paper.trilha .signature-header .resume-photo{width:23mm;height:23mm;border-radius:50%}
+.paper.trilha .contact{padding:10pt var(--margin-x);border-bottom:1px solid var(--resume-rule);background:var(--resume-soft);font-size:.73em}
+.paper.trilha .reference-content{padding:0 var(--margin-x) var(--margin-y)}
+.paper.trilha h3{color:var(--resume-ink);text-transform:none;font-size:calc(var(--heading-size)*.9);letter-spacing:0;border-color:var(--resume-rule)}
+.paper.trilha section:is([data-section=experience],[data-section=education],[data-section=courses]) .resume-entry{padding-left:90pt;position:relative;border:0}
+.paper.trilha section:is([data-section=experience],[data-section=education],[data-section=courses]) .resume-entry:before{content:'';position:absolute;left:75pt;top:4pt;bottom:-15pt;border-left:1px solid var(--resume-rule)}
+.paper.trilha section:is([data-section=experience],[data-section=education],[data-section=courses]) .resume-entry:after{content:'';position:absolute;left:72pt;top:4pt;width:6pt;height:6pt;border-radius:50%;background:var(--resume-color)}
+.paper.trilha section:is([data-section=experience],[data-section=education],[data-section=courses]) .resume-entry:last-child:before{bottom:3pt}
+.paper.trilha .entry-heading{display:block}
+.paper.trilha .entry-heading .meta{position:absolute;top:0;left:0;width:66pt;color:var(--resume-ink);font-size:.76em;line-height:1.7;overflow-wrap:anywhere}
+.paper.trilha section[data-section=skills] .section-body>ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6pt}
+.paper.trilha section[data-section=skills] li{border:1px solid var(--resume-rule);padding:4pt 7pt;background:var(--resume-faint);font-size:.84em;border-radius:3pt;margin:0}
+/* Urban: clear rectangular section flags and restrained typography. */
+.paper.urbano .reference-layout{padding:var(--margin-y) var(--margin-x)}
+.paper.urbano .signature-header{padding:0 0 14pt;align-items:center;border-bottom:3pt solid var(--resume-color)}
+.paper.urbano .signature-header h2{font-size:calc(var(--name-size)*.98);text-transform:uppercase;letter-spacing:.5pt;color:var(--resume-ink)}
+.paper.urbano .signature-header .job-title{font-size:.92em;letter-spacing:.3pt;color:var(--resume-ink)}
+.paper.urbano .signature-header .resume-photo{width:24mm;height:24mm;border-radius:2pt}
+.paper.urbano .contact{padding-top:10pt;border:0;font-size:.73em}
+.paper.urbano h3{display:table;font-size:calc(var(--heading-size)*.72);letter-spacing:1pt;background:var(--resume-color);color:var(--resume-on-color);border:0;padding:5pt 9pt;margin-bottom:10pt}
+.paper.urbano .resume-entry{padding-bottom:8pt;border-bottom:1px solid var(--resume-soft)}
+.paper.urbano .resume-entry:last-child{border-bottom:0;padding-bottom:0}
+.paper.urbano section[data-section=skills] .section-body>ul{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media print{.paper.urbano .reference-layout{padding:0}.paper.trilha .signature-header{padding:6mm}.paper.trilha .contact{padding:8pt 6mm}.paper.trilha .reference-content{padding:0}.paper.panorama .signature-header{padding:5mm 0}}
+.paper.trilha h3{margin-top:calc(var(--section-gap)*.88)}
+.paper.urbano h3{margin-top:calc(var(--section-gap)*.78);padding:4pt 8pt}
+.paper.urbano .resume-entry{margin-bottom:10pt}

@@ -16,3 +16,11 @@ test('signature templates preserve sections, escape names and support optional p
   d.hiddenSections=['skills'];assert.ok(!C.resumeHTML(d).includes('data-section="skills"'));
  }
 });
+test('additional layouts preserve data, photo choice and section visibility',()=>{
+ for(const template of ['orbita','panorama','trilha','urbano']){
+  const d=A.makeResume(answers(),{template,color:'#f58b0c'}),original=structuredClone(d);
+  const html=C.resumeHTML(d);assert.equal(C.normalize(d).template,template);assert.ok(html.includes('Atendimento ao público'));assert.ok(html.includes('Ensino médio'));assert.ok(!html.includes('data:image'));
+  d.photo='data:image/png;base64,aGVsbG8=';assert.equal((C.resumeHTML(d).match(/class="resume-photo"/g)||[]).length,1);
+  d.hiddenSections=['education'];assert.ok(!C.resumeHTML(d).includes('data-section="education"'));assert.equal(original.photo,'');assert.ok(C.paperStyle(d).includes('--resume-color:#f58b0c'));
+ }
+});
