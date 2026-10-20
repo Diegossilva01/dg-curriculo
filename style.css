@@ -252,3 +252,32 @@
 .paper.aurora .signature-content>section{grid-template-columns:100pt minmax(0,1fr);gap:15pt;padding:12pt 0}
 .paper.aurora .section-body{font-size:.9em}
 @media print{.paper.aurora .signature-content>section{padding-top:9pt;padding-bottom:9pt}.paper.aurora .signature-content>section:last-child{padding-bottom:0}}
+
+/* A selected color drives each template's background and readable foreground. */
+.paper.aurora .signature-header,.paper.vertice .resume-side,.paper.lateral .resume-side{background:var(--resume-color);color:var(--resume-on-color)}
+.paper.aurora .signature-header h2,.paper.aurora .signature-header .job-title,.paper.aurora .resume-monogram{color:var(--resume-on-color)}
+.paper.aurora .signature-contact{background:var(--resume-soft)}
+.paper.aurora .signature-contact .contact,.paper.aurora .signature-content>section>h3{color:var(--resume-ink)}
+.paper.vertice .resume-side h3,.paper.vertice .resume-side p,.paper.vertice .resume-side li,.paper.vertice .resume-side a,.paper.vertice .resume-monogram{color:var(--resume-on-color)}
+.paper.vertice .resume-side h3{border-color:currentColor}
+.paper.vertice .resume-side li::marker,.paper.lateral .resume-side li::marker{color:var(--resume-on-color)}
+.paper.vertice .resume-monogram{background:var(--resume-color)}
+.paper.vertice .resume-main h3{background:var(--resume-soft);color:var(--resume-ink)}
+.paper.vertice .signature-header h2{color:var(--resume-ink)}
+.paper.atelier .resume-side{background:var(--resume-panel);color:var(--resume-ink)}
+.paper.atelier .resume-main{background:var(--resume-faint)}
+.paper.atelier .signature-header{border-color:var(--resume-rule)}
+.paper.atelier .signature-header h2,.paper.atelier .signature-header .job-title,.paper.atelier .resume-main h3,.paper.atelier .resume-side h3,.paper.atelier .resume-side p,.paper.atelier .resume-side li,.paper.atelier h4,.paper.atelier li::marker{color:var(--resume-ink)}
+.paper.atelier .resume-main h3,.paper.atelier .resume-side h3{border-color:var(--resume-rule)}
+.paper.atelier .resume-monogram{background:var(--resume-soft);color:var(--resume-ink)}
+.paper.horizonte .signature-header{background:var(--resume-panel)}
+.paper.horizonte .signature-header h2,.paper.horizonte .signature-header .job-title,.paper.horizonte .resume-main h3,.paper.horizonte .resume-side h3{color:var(--resume-ink)}
+.paper.horizonte .resume-side{background:var(--resume-faint);border-color:var(--resume-rule)}
+.paper.corporativo .resume-side,.paper.impecavel .resume-side,.paper.contemporaneo .resume-side{background:var(--resume-soft);color:var(--resume-ink)}
+.paper.corporativo .resume-side h3,.paper.impecavel .resume-side h3,.paper.contemporaneo .resume-side h3{color:var(--resume-ink);border-color:var(--resume-rule)}
+.paper.corporativo .resume-main{border-top-color:var(--resume-panel)}
+.paper.editorial .resume-side{background:var(--resume-panel);color:var(--resume-ink);border-color:var(--resume-rule)}
+.paper.editorial .resume-side h3,.paper.editorial .resume-main h3,.paper.editorial h2,.paper.editorial .job-title{color:var(--resume-ink)}
+.paper.editorial .resume-side h3,.paper.editorial .resume-main h3{border-color:var(--resume-rule)}
+.paper.inteligente .resume-header,.paper.tecnico section[data-section=skills] li{background:var(--resume-soft)}
+.paper.lateral .resume-side h3{color:var(--resume-on-color);border-color:currentColor}
