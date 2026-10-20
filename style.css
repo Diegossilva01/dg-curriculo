@@ -6,3 +6,5 @@
 /* Watermark belongs to every browser preview. It is text, so it prints even with backgrounds disabled. */
 .paper.preview-only{position:relative;isolation:isolate;overflow:hidden}.preview-document{position:relative;z-index:0}.preview-watermark{position:absolute;inset:0;z-index:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:180px;overflow:hidden;pointer-events:none;color:rgba(88,58,110,.24);font:700 20pt Arial,sans-serif;letter-spacing:.6pt}.preview-watermark>span{display:flex;align-items:center;justify-content:center;white-space:nowrap;transform:rotate(-28deg);user-select:none}.paper.preview-only .resume-header{position:relative;z-index:0}
 @media print{#large-preview .paper.preview-only{position:relative;overflow:visible!important}#large-preview .preview-watermark{position:fixed;inset:0;height:100%;color:rgba(88,58,110,.3);z-index:999;print-color-adjust:exact;-webkit-print-color-adjust:exact;grid-auto-rows:180px}#large-preview::before{display:none!important}}
+/* Keep the on-screen preview clean; final exports still require server-verified access. */
+@media screen{.preview-watermark{display:none!important}}
