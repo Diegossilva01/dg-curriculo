@@ -25,7 +25,7 @@ Depois da mensagem de inicialização, abra `http://127.0.0.1:3000` (inicial) ou
 
 ## O que foi preservado e acrescentado
 
-- Editor com 10 layouts, paleta, foto/enquadramento, dados pessoais, experiências, formação, habilidades, idiomas, resumo, cursos, certificados, links e extras.
+- Editor com 16 layouts, paleta, foto/enquadramento, dados pessoais, experiências, formação, habilidades, idiomas, resumo, cursos, certificados, links e extras.
 - Formatação, reordenação, prévia, rascunhos locais, duplicação, exclusão e backup JSON. Modelos trocados sem apagar campos.
 - Conta: cadastro, login, logout, confirmação de e-mail e recuperação de senha usando Supabase Auth, com PKCE nos links. Senhas não são armazenadas pela aplicação.
 - Página `/meus-curriculos/`: listagem, abrir, renomear, duplicar, salvar e excluir documentos da conta. O conteúdo é protegido no servidor; a listagem exibe somente metadados do próprio usuário.
@@ -221,3 +221,12 @@ Sem a migração 002, a função específica de autorização não existe e a AP
 Verificação desta atualização: testes da aplicação exercitam os três formatos sem compra, outra conta, direito expirado e compra de outro currículo, com transporte Supabase/Mercado Pago controlado em memória. Também verificam rejeição do payload antigo, uso do conteúdo persistido e a marcação repetida da prévia. **Esses testes não equivalem a aplicar a migração em PostgreSQL real, usar duas contas reais ou validar visualmente o PDF/print no Chrome.** Sem credenciais/Chromium esses itens continuam pendentes.
 
 Para testes externos opcionais, `TEST_UNPAID_RESUME_ID` e `TEST_EXPIRED_RESUME_ID` podem apontar para documentos próprios da conta A em um projeto de teste. Não crie pagamentos fictícios para homologar Mercado Pago. Cobrança real permanece desligada.
+
+
+## Assistente guiado e modelos profissionais
+
+A criação de um novo currículo começa na galeria de modelos. Depois da escolha, o usuário pode preencher manualmente ou responder às sete etapas do assistente. Executivo, Corporativo, Minimalista, Acadêmico, Técnico e Editorial complementam os modelos existentes.
+
+O assistente é programado e funciona no navegador: não utiliza uma API de IA generativa, não exige chave e não envia as respostas a outro provedor. Ele organiza os dados e propõe um resumo com base somente no objetivo, experiência e habilidades informados. A opção de primeiro emprego não cria experiências fictícias. O resumo pode ser substituído antes da montagem.
+
+As respostas ficam em armazenamento local por rascunho. A finalização cria outro rascunho, preserva o documento anterior e abre a prévia para revisão. Pagamento e verificação de acesso continuam obrigatórios para salvar na conta ou exportar. Os arquivos `assistant-core.js` e `assistant.js` são copiados pelo build para `/assets/`.
