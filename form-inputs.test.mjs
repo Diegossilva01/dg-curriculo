@@ -27,3 +27,10 @@ test('guided courses preserve selected dates, institution and hours while accept
  const old=A.makeResume({contact,courses:'Excel\nInformática'});
  assert.deepEqual(old.courses.map(c=>c.title),['Excel','Informática']);
 });
+test('assistant uses its selected photo without changing the source draft and allows explicitly removing it',()=>{
+ const source=C.normalize({photo:'data:image/png;base64,aGVsbG8='}),contact={first:'Ana',last:'Silva',role:'Vendedora'},photo='data:image/jpeg;base64,aGVsbG8=';
+ assert.equal(A.makeResume({contact,photo},source).photo,photo);
+ assert.equal(A.makeResume({contact,photo:''},source).photo,'');
+ assert.equal(A.makeResume({contact},source).photo,source.photo);
+ assert.equal(source.photo,'data:image/png;base64,aGVsbG8=');
+});

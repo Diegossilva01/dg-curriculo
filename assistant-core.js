@@ -22,7 +22,7 @@ function makeResume(answers,appearance={}){
  const education=(answers.education||[]).filter(e=>clean(e.course)||clean(e.school));
  const languageItems=lines(answers.languages).map(line=>{const [language,...level]=line.split(/\s+[—–-]\s+/);return {language,level:level.join(' — ')};});
  const courses=Array.isArray(answers.courses)?answers.courses.filter(e=>clean(e.title)):lines(answers.courses).map(title=>({title,institution:'',date:'',description:''}));
- const raw={...C.blank(),...contact,experience,education,skills:lines(answers.skills).join('\n'),languageItems,courses,summary:summary(answers),additional:clean(answers.additional),template:appearance.template,color:appearance.color,format:appearance.format,photo:appearance.photo||'',name:[clean(contact.first),clean(contact.last)].join(' ')+' — currículo'};
+ const raw={...C.blank(),...contact,experience,education,skills:lines(answers.skills).join('\n'),languageItems,courses,summary:summary(answers),additional:clean(answers.additional),template:appearance.template,color:appearance.color,format:appearance.format,photo:typeof answers.photo==='string'?answers.photo:appearance.photo||'',name:[clean(contact.first),clean(contact.last)].join(' ')+' — currículo'};
  if(answers.noExperience||appearance.template==='academico')raw.order=['summary','education','skills','experience',...raw.order.filter(id=>!['summary','education','skills','experience'].includes(id))];
  return C.normalize(raw);
 }
