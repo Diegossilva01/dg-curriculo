@@ -19,3 +19,7 @@ body.home-body{font-family:Arial,Helvetica,sans-serif;color:var(--home-ink);back
 
 /* Use a geometric transform so Safari scales letters and spacing together. */
 .home-preview .paper{zoom:1!important;transform:scale(var(--preview-scale));transform-origin:top left}
+
+/* Capricha CV wordmark */
+.cv-brand-mark{display:block;object-fit:contain;flex-shrink:0}.home-brand{font-family:Arial,Helvetica,sans-serif;letter-spacing:-1px}.home-brand .cv-brand-accent{color:#397363;font-weight:750}@media(max-width:600px){.home-brand{font-size:21px;gap:7px}.home-brand .cv-brand-mark{width:31px;height:31px}}@media(max-width:380px){.home-nav nav{display:none}.home-brand{font-size:20px}}
+@media(max-width:600px){.home-nav .home-nav-cta{font-size:10px;padding:10px 12px;gap:8px}.home-nav .home-brand{font-size:20px}}@media(max-width:380px){.home-nav .home-brand{font-size:18px;letter-spacing:-.7px}.home-nav .home-brand .cv-brand-mark{width:29px;height:29px}}

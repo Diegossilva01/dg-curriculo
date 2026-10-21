@@ -52,7 +52,7 @@ if(d.template==='vertice'||d.template==='atelier')return `<div class="resume-col
 if(d.template==='horizonte')return `<div class="signature-layout"><header class="signature-header">${portrait}${identity}</header><div class="resume-columns signature-columns"><div class="resume-main">${mainContent}</div><aside class="resume-side">${sideContent}</aside></div></div>`;
 if(columnModels.includes(d.template)){const sidebarIds=['skills','languages','certificates','links'];const sidebar=`<section class="contact-section"><h3>Contato</h3><div class="side-contacts">${contactParts.map(value=>`<p>${esc(value)}</p>`).join('')}</div></section>`+d.order.filter(id=>sidebarIds.includes(id)).map(section).join('');return `<div class="resume-columns"><aside class="resume-side">${photo}${sidebar}</aside><div class="resume-main">${header.replace(photo,'')}${d.order.filter(id=>!sidebarIds.includes(id)).map(section).join('')}</div></div>`;}
 return header+contactHTML+d.order.map(section).join('');}
-function previewHTML(d){return `<div class="preview-document">${resumeHTML(d)}</div><div class="preview-watermark" aria-hidden="true">${'<span>TRAJETÓRIA · PRÉVIA</span>'.repeat(16)}</div>`;}
+function previewHTML(d){return `<div class="preview-document">${resumeHTML(d)}</div><div class="preview-watermark" aria-hidden="true">${'<span>CAPRICHA CV · PRÉVIA</span>'.repeat(16)}</div>`;}
 function colorPalette(value){
  const color=/^#[\da-f]{6}$/i.test(value)?value:'#315c4b';
  const rgb=[1,3,5].map(i=>parseInt(color.slice(i,i+2),16));
