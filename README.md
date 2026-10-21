@@ -1,3 +1,5 @@
+> Validação real temporária: a oferta atual cobra R$ 0,50, versão `cv-specific-30d-real-check-50c-v1`. Após confirmar pagamento e exportação, restaurar R$ 14,90 e a versão `cv-specific-30d-v1`. Pedidos antigos mantêm seu valor original.
+
 # Trajetória
 
 Editor existente preservado, com páginas públicas estáticas e API Node serverless para Vercel. Supabase Auth/PostgreSQL e Mercado Pago Checkout Pro implementados por APIs oficiais. Nenhuma publicação, repositório remoto, push ou cobrança foi feito nesta sessão.
