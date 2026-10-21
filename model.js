@@ -18,7 +18,7 @@ function monthValue(value){const v=String(value||'').trim();if(/^\d{4}-(0[1-9]|1
 function monthLabel(value){const v=monthValue(value);return v?monthNames[Number(v.slice(5))-1]+' '+v.slice(0,4):String(value||'');}
 function normalize(raw){if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error('Formato de currículo inválido');const d=blank();for(const k of ['first','last','role','email','phone','city','address','postal','country','link','summary','skills','languages','additional','name'])if(typeof raw[k]==='string')d[k]=text(raw[k]);
 d.first=formatName(d.first);d.last=formatName(d.last);
-const fields={experience:['role','company','city','start','end','description'],education:['course','school','city','degree','start','end','description'],courses:['title','institution','date','description'],certificates:['title','issuer','date','url'],links:['label','url'],languageItems:['language','level']};
+const fields={experience:['role','company','city','start','end','description'],education:['course','school','city','degree','start','end','description'],courses:['title','institution','date','hours','description'],certificates:['title','issuer','date','url'],links:['label','url'],languageItems:['language','level']};
 for(const [key,keys] of Object.entries(fields))if(Array.isArray(raw[key]))d[key]=raw[key].slice(0,150).filter(e=>e&&typeof e==='object').map(e=>Object.fromEntries(keys.map(k=>[k,text(e[k])])));
 if(!d.languageItems.length&&d.languages)d.languageItems=d.languages.split('\n').filter(Boolean).map(l=>{const [language,...level]=l.split(/\s[—–-]\s/);return {language,level:level.join(' — ')||'Não informado'};});
 if(Array.isArray(raw.customSections))d.customSections=raw.customSections.slice(0,40).map((e,i)=>({id:/^custom-[\w-]+$/.test(e?.id)?e.id:'custom-'+i,title:text(e?.title,200)||'Seção adicional',body:text(e?.body)}));
@@ -38,7 +38,7 @@ if(id==='skills')return d.skills.trim()?list(d.skills):'';
 if(id==='languages')return d.languageItems.filter(e=>e.language).map(e=>`<p>${esc(e.language)}${e.level?' — '+esc(e.level):''}</p>`).join('');
 if(id==='experience')return d.experience.filter(e=>e.role||e.company||e.description).map(e=>entry(e.role,[e.company,e.city].filter(Boolean).join(' · '),date(e),e.description)).join('');
 if(id==='education')return d.education.filter(e=>e.course||e.school).map(e=>entry(e.course,[e.degree,e.school,e.city].filter(Boolean).join(' · '),date(e),e.description)).join('');
-if(id==='courses')return d.courses.filter(e=>e.title).map(e=>entry(e.title,e.institution,e.date,e.description)).join('');
+if(id==='courses')return d.courses.filter(e=>e.title).map(e=>entry(e.title,e.institution,[e.date,e.hours].filter(Boolean).join(' · '),e.description)).join('');
 if(id==='certificates')return d.certificates.filter(e=>e.title).map(e=>entry(e.title,e.issuer,e.date,e.url)).join('');
 if(id==='links')return d.links.filter(e=>e.url).map(e=>`<p>${e.label?esc(e.label)+': ':''}${safeURL(e.url)?`<a href="${esc(safeURL(e.url))}" target="_blank" rel="noopener noreferrer">${esc(e.url)}</a>`:esc(e.url)}</p>`).join('');
 const custom=d.customSections.find(e=>e.id===id);return custom?.body?`<p>${esc(custom.body)}</p>`:'';}

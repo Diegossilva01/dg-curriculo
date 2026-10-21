@@ -19,3 +19,11 @@ test('month picker round trips existing dates and preserves free text when it ca
  assert.equal(C.monthValue('2023'),'');assert.equal(C.monthLabel('2023'),'2023');
  assert.equal(C.monthValue('2023-13'),'');assert.equal(C.monthLabel(''), '');
 });
+test('guided courses preserve selected dates, institution and hours while accepting older interviews',()=>{
+ const contact={first:'Ana',last:'Silva',role:'Atendente'};
+ const d=A.makeResume({contact,courses:[{title:'Excel',institution:'Escola',date:'Ago 2024',hours:'40 horas'}]});
+ assert.equal(d.courses[0].date,'Ago 2024');assert.equal(d.courses[0].hours,'40 horas');assert.equal(d.courses[0].institution,'Escola');
+ assert.ok(C.sectionContent(d,'courses').includes('40 horas'));
+ const old=A.makeResume({contact,courses:'Excel\nInformática'});
+ assert.deepEqual(old.courses.map(c=>c.title),['Excel','Informática']);
+});
