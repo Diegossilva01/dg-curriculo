@@ -32,3 +32,6 @@ globalThis.EXPERIENCE_EXAMPLES = [
   "Atuação em serviços voluntários, adquirindo experiência de trabalho em equipe e contribuindo para objetivos sociais e comunitários.",
   "Limpeza e conservação dos ambientes, garantindo a organização, higiene e condições adequadas de uso."
 ];
+
+// Select only competencies that describe the candidate.
+globalThis.SKILL_EXAMPLES = ["Atendimento ao cliente", "Comunicação", "Organização", "Trabalho em equipe", "Responsabilidade", "Pontualidade", "Facilidade para aprender", "Resolução de problemas", "Proatividade", "Atenção aos detalhes", "Vendas e negociação", "Operação de caixa", "Controle de estoque", "Organização de documentos", "Rotinas administrativas", "Excel básico", "Word", "Informática básica", "Redes sociais", "Liderança", "Gestão de equipes", "Manutenção de equipamentos", "Limpeza e conservação", "Separação de materiais"];
