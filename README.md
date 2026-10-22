@@ -147,12 +147,12 @@ No ambiente de produção da Vercel, preencha os **valores reais** e faça novo 
 | Variável | Valor a fornecer |
 |---|---|
 | `GTM_CONTAINER_ID` | ID real do contêiner Web do Google Tag Manager; vazio por padrão |
-| `MEASUREMENT_ENABLED` | `true` para habilitar; padrão `false` |
+| `MEASUREMENT_ENABLED` | `false` para desativar; habilitada por padrão somente em produção |
 | `MEASUREMENT_ALLOW_NONPRODUCTION` | `false` em uso normal; `true` apenas para testar no Tag Assistant, preferencialmente com contêiner separado |
 | `APP_URL` | Origem HTTPS do domínio próprio, sem caminho |
 | `SEO_INDEXABLE` | `true` apenas na produção definitiva; `false` em testes/previews |
 
-Os IDs/labels de conversão do Google Ads e, se usado, o Measurement ID do GA4 são inseridos **no GTM**, não no código e não como credenciais do backend. Nenhum ID foi preenchido. A CSP em vercel.json permite os endpoints Google usados pelos templates de tags; confira violações no navegador ao homologar e autorize apenas domínios oficiais necessários.
+Ao usar GTM, configure nele os IDs/labels de conversão do Google Ads e, se usado, o Measurement ID do GA4. A alternativa de tag direta está documentada abaixo; o ID público não é uma credencial de backend. A CSP em vercel.json permite os endpoints Google usados pelos templates de tags; confira violações no navegador ao homologar e autorize apenas domínios oficiais necessários.
 
 ### Consentimento e dados permitidos
 
@@ -246,3 +246,8 @@ A coleção também inclui Órbita (perfil circular e curva de cor), Panorama (f
 ### Página inicial
 
 A página pública inicial é gerada por `scripts/home.mjs` e usa `web/home.css`. As prévias decorativas são geradas com o renderizador dos modelos reais e dados fictícios; não acessam rascunhos ou dados do visitante. O CSS dos modelos é limitado às prévias por `@scope`. A página apresenta 24 modelos, exemplos de atividades, funcionamento do assistente programado e a oferta de um currículo por 30 dias. Os links Usar este modelo enviam um identificador validado ao editor, preservando o conteúdo já preenchido; o parâmetro é removido após a aplicação para não sobrescrever escolhas futuras ao recarregar.
+
+### Tag direta do Google Ads — Capricha CV
+A tag pública `AW-17755074618` está configurada como padrão em produção, sem exigir GTM. Ela só carrega após consentimento de anúncios. `MEASUREMENT_ENABLED=false` desativa a medição; se essa variável estiver definida no Vercel, altere para `true` e publique novamente. `GOOGLE_ADS_TAG_ID` permite substituir o ID. Um `GTM_CONTAINER_ID` válido tem precedência e mantém a configuração pelo contêiner, sem instalar uma segunda tag direta. Preview e desenvolvimento continuam desativados por padrão.
+
+Esta é a tag base, não uma conversão de compra: falta o rótulo (label) da ação Compra no Google Ads para enviar o evento `conversion` direto. O evento interno `purchase` continua exigindo pagamento confirmado no servidor. Não configure conversão por visita à página de retorno, clique no pagamento ou início do checkout.
