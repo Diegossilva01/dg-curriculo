@@ -21,3 +21,28 @@ test('tag direta carrega uma vez com consentimento de anúncios, sem simular con
 test('conversão Ads usa pedido aprovado, valor real e ID único sem dados pessoais',async()=>{const c=client({adsOnly:true,response:{id:orderId,status:'approved',purchase:{transaction_id:orderId,value:14.9,currency:'BRL',email:'private@example.com'}}});await Promise.all([c.context.TrajetoriaAnalytics.purchase(orderId),c.context.TrajetoriaAnalytics.purchase(orderId)]);await c.context.TrajetoriaAnalytics.purchase(orderId);const conversions=Array.from(c.context.dataLayer).filter(x=>x[0]==='event'&&x[1]==='conversion');assert.equal(conversions.length,1);assert.equal(conversions[0][2].send_to,'AW-17755074618/1hIfCN_umqUdELrgo5JC');assert.equal(conversions[0][2].value,14.9);assert.equal(conversions[0][2].currency,'BRL');assert.equal(conversions[0][2].transaction_id,orderId);assert.ok(!JSON.stringify(conversions).includes('private@example.com'));assert.ok(!JSON.stringify(conversions).includes('secret-not'));});
 test('conversão Ads não dispara por checkout, pendência, recibo inválido, ausência de label ou consentimento',async()=>{for(const options of [{response:{id:orderId,status:'pending',purchase:null}},{response:{id:orderId,status:'approved',purchase:{transaction_id:orderId,value:0,currency:'BRL'}}},{label:''},{grant:false},{analyticsOnly:true},{enabled:false}]){const c=client({adsOnly:true,response:{id:orderId,status:'approved',purchase:{transaction_id:orderId,value:14.9,currency:'BRL'}},...options});c.context.TrajetoriaAnalytics.checkout({transaction_id:orderId,value:14.9,currency:'BRL'});await c.context.TrajetoriaAnalytics.purchase(orderId);assert.equal(Array.from(c.context.dataLayer||[]).filter(x=>x[0]==='event'&&x[1]==='conversion').length,0);}});
 test('label direto é validado e não se aplica a outro ID ou ao GTM',()=>{assert.equal(measurementConfig({VERCEL_ENV:'production'}).adsConversionLabel,'1hIfCN_umqUdELrgo5JC');assert.equal(measurementConfig({GOOGLE_ADS_TAG_ID:'AW-12345678'}).adsConversionLabel,null);assert.equal(measurementConfig({GOOGLE_ADS_CONVERSION_LABEL:'<script>'}).adsConversionLabel,null);assert.equal(measurementConfig({GTM_CONTAINER_ID:'GTM-UNITTEST'}).adsConversionLabel,null);});
+
+
+test('produção inclui tag estática no head em todas as rotas, sem duplicar configuração',async()=>{
+ const folder=mkdtempSync(join(tmpdir(),'cv-google-head-'));
+ const keys=['VERCEL_ENV','APP_URL','GTM_CONTAINER_ID','MEASUREMENT_ENABLED'];
+ const before=Object.fromEntries(keys.map(k=>[k,process.env[k]]));
+ try{
+  Object.assign(process.env,{VERCEL_ENV:'production',APP_URL:'https://site.example',GTM_CONTAINER_ID:'',MEASUREMENT_ENABLED:'true'});
+  await build({destination:folder});
+  for(const path of ['','editor/','meus-curriculos/','auth/callback/','pagamento/aprovado/','pagamento/pendente/','pagamento/nao-concluido/','modelos-de-curriculo/','primeiro-emprego/','jovem-aprendiz/','contato/','privacidade/','condicoes-de-compra/']){
+   const html=readFileSync(join(folder,path,'index.html'),'utf8');
+   const head=html.split('<head>')[1].split('</head>')[0];
+   assert.ok(head.startsWith('<script id="measurement-config"'));
+   assert.equal((html.match(/googletagmanager.com\/gtag\/js\?id=AW-17755074618/g)||[]).length,1);
+   assert.ok(head.indexOf('/assets/google-tag-init.js')<head.indexOf('id="google-ads-tag"'));
+  }
+  const commands=[];
+  const context=vm.createContext({document:{getElementById:()=>({textContent:JSON.stringify({enabled:true,adsId:'AW-17755074618'})})},localStorage:{getItem:()=>null},location:{origin:'https://site.example',pathname:'/pagamento/aprovado',search:'?email=private@example.com'},dataLayer:commands});
+  vm.runInContext(readFileSync(join(folder,'assets/google-tag-init.js'),'utf8'),context);
+  assert.equal(commands[0][0],'consent');assert.equal(commands[0][2].ad_storage,'denied');
+  assert.equal(commands.filter(x=>x[0]==='config').length,1);
+  assert.ok(!JSON.stringify(commands).includes('private@example.com'));
+  assert.ok(!commands.some(x=>x[0]==='event'&&x[1]==='conversion'));
+ }finally{for(const k of keys)if(before[k]===undefined)delete process.env[k];else process.env[k]=before[k];rmSync(folder,{recursive:true,force:true});}
+});

@@ -4,7 +4,7 @@ const configElement=document.getElementById('measurement-config');let config={en
 const useGTM=/^GTM-[A-Z0-9]{4,30}$/.test(config.gtmId||'');
 const useAds=!useGTM&&/^AW-\d{5,20}$/.test(config.adsId||'');
 const active=config.enabled===true&&(useGTM||useAds);
-const CONSENT_KEY='trajetoria.measurement-consent.v1',queue=[],seen=new Set();let consent={analytics:false,ads:false},loaded=false,choice=false;
+const CONSENT_KEY='trajetoria.measurement-consent.v1',queue=[],seen=new Set();let consent={analytics:false,ads:false},loaded=!!(active&&useAds&&document.getElementById('google-ads-tag')),choice=false;
 try{const saved=JSON.parse(localStorage.getItem(CONSENT_KEY)||'null');if(saved){choice=true;consent={analytics:saved.analytics===true,ads:saved.ads===true};}}catch{}
 function pageKind(){const path=location.pathname;return path.startsWith('/editor')?'editor':path.startsWith('/pagamento')?'payment_return':path.startsWith('/auth')?'auth':path.startsWith('/meus-curriculos')?'account':path==='/modelos-de-curriculo/'?'templates':path==='/primeiro-emprego/'?'first_job':path==='/jovem-aprendiz/'?'apprentice':path==='/'?'home':'public';}
 function cleanPage(){return location.origin+({'editor':'/editor/','payment_return':'/pagamento/','auth':'/auth/','account':'/meus-curriculos/','templates':'/modelos-de-curriculo/','first_job':'/primeiro-emprego/','apprentice':'/jovem-aprendiz/','home':'/','public':'/'}[pageKind()]);}
